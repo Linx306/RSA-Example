@@ -19,6 +19,9 @@
     <h2>Datos Encriptados:</h2>
     <p id="encryptedData"></p>
 
+    <h2>Datos Desencriptados:</h2>
+    <p id="decryptedData"></p>
+
     <script>
         const encrypt = new JSEncrypt();
         const decrypt = new JSEncrypt();
@@ -38,11 +41,19 @@
             encrypt.setPublicKey(publicKey);
             const encryptedPassword = encrypt.encrypt(password);
 
-            // Mostrar los datos encriptados
+            // Desencriptar la contraseña con la clave privada
+            decrypt.setPrivateKey(privateKey);
+            const decryptedPassword = decrypt.decrypt(encryptedPassword);
+
+            // Mostrar los datos encriptados y desencriptados
             document.getElementById('encryptedData').innerHTML = `
                 <strong>Clave Pública:</strong> ${publicKey}<br>
                 <strong>Clave Privada:</strong> ${privateKey}<br>
                 <strong>Contraseña Encriptada:</strong> ${encryptedPassword}
+            `;
+
+            document.getElementById('decryptedData').innerHTML = `
+                <strong>Contraseña Desencriptada:</strong> ${decryptedPassword}
             `;
         });
     </script>
